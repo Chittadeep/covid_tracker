@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
-import 'place.dart';
+import 'Place.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
 
 class Details extends StatelessWidget {
-  final place state;
+  final Place state;
 
   Details({Key key, this.state}) : super(key: key);
+
+  /*final List<BarChartModel> data = [
+    BarChartModel(
+        cause: "active cases",
+        figure: 89.00,
+        color: charts.ColorUtil.fromDartColor(Color(0xFF47505F)))
+  ];*/
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +60,7 @@ class Details extends StatelessWidget {
               ListTile(
                   title: Text('total Infected: '),
                   subtitle: Text(state.totalInfected.toString())),
-              PieChart(dataMap: state.getPie())
+              PieChart(dataMap: state.getPie()),
             ],
           )),
         ),

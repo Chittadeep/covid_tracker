@@ -1,4 +1,6 @@
-class place {
+import 'package:charts_flutter/flutter.dart' as charts;
+
+class Place {
   String region;
   double activeCases;
   double newInfected;
@@ -8,11 +10,11 @@ class place {
   double newDeceased;
   double totalInfected;
 
-  place(this.region, this.activeCases, this.newInfected, this.recovered,
+  Place(this.region, this.activeCases, this.newInfected, this.recovered,
       this.newRecovered, this.deceased, this.newDeceased, this.totalInfected);
 
-  factory place.fromMap(Map<String, dynamic> json) {
-    return place(
+  factory Place.fromMap(Map<String, dynamic> json) {
+    return Place(
         json['region'] as String,
         json['activeCases'] as double,
         json['newInfected'] as double,
@@ -34,4 +36,12 @@ class place {
       "toralInfected": totalInfected
     };
   }
+}
+
+class BarChartModel {
+  String cause;
+  double figure;
+  final charts.Color color;
+
+  BarChartModel({this.cause, this.figure, this.color});
 }

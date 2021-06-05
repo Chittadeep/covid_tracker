@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:covid_tracker/Details.dart';
 import 'package:http/http.dart' as http;
+import 'package:pie_chart/pie_chart.dart';
 import 'dart:convert';
-import 'place.dart';
+import 'Place.dart';
 
 void main() async {
   //await MyApp().fetchData();
@@ -12,17 +13,19 @@ void main() async {
 class MyApp extends StatelessWidget {
   List data = [];
 
-  int activeCases;
-  int activeCasesNew;
-  int recovered;
-  int recoveredNew;
-  int deaths;
-  int deathsNew;
-  int previousDayTests;
-  int totalCases;
+  double activeCases;
+  double activeCasesNew;
+  double recovered;
+  double recoveredNew;
+  double deaths;
+  double deathsNew;
+  double previousDayTests;
+  double totalCases;
   String sourceUrl;
   String lastUpdatedAtApify;
   String readMe;
+
+  Map<String, double> nation;
 
   Future fetchData() async {
     var response = await http.get(
@@ -41,14 +44,21 @@ class MyApp extends StatelessWidget {
     deathsNew = map['deathsNew'];
     previousDayTests = map['previousDayTests'];
     totalCases = map['totalCases'];
+
     sourceUrl = map['sourceUrl'];
     lastUpdatedAtApify = map['lastUpdatedAtApify'];
     readMe = map['readMe'];
 
-    print(readMe);
+    nation = {'activeCases':activeCases,
+    'activeCasesNew':activeCasesNew,
+    'recovered':recovered,
+    'recovered new': recoveredNew,
+    'deaths':deaths,
+    'deaths New':deathsNew,
+    'previousDayTests':previousDayTests};
 
     regionData.forEach((element) {
-      var state = place.fromMap(element);
+      var state = Place.fromMap(element);
       data.add(state);
     });
   }
@@ -98,7 +108,12 @@ class MyApp extends StatelessWidget {
             ),
             body: Center(
               child: Column(
-                children: [
+                children: [PieChart(dataMap: nation), Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('data source $sourceUrl'),
+                    Text('data updated $lastUpdatedAtApify')
+                  ],
+                ),
                   Card(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
