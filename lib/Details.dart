@@ -10,6 +10,20 @@ class Details extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          title: Text("Covid Tracker"),
+          automaticallyImplyLeading: true,
+          actions: [
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text(
+                  'Created by \nChittadeep Biswas',
+                )
+              ],
+            )
+          ],
+        ),
         body: Center(
             child: Column(
           children: [

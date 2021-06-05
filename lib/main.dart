@@ -12,6 +12,18 @@ void main() async {
 class MyApp extends StatelessWidget {
   List data = [];
 
+  int activeCases;
+  int activeCasesNew;
+  int recovered;
+  int recoveredNew;
+  int deaths;
+  int deathsNew;
+  int previousDayTests;
+  int totalCases;
+  String sourceUrl;
+  String lastUpdatedAtApify;
+  String readMe;
+
   Future fetchData() async {
     var response = await http.get(
         Uri.parse('https://api.apify.com/v2/datasets/GN5szDInfK8hOgCna/items'));
@@ -20,6 +32,20 @@ class MyApp extends StatelessWidget {
     var map = si[0]; //gets the firstmap inside the biggest list of the JSON
     List regionData = map[
         'regionData']; //gets the region datas inside the first map in list form
+
+    activeCases = map['activeCases'];
+    activeCasesNew = map['activeCasesNew'];
+    recovered = map['recovered'];
+    recoveredNew = map['recoveredNew'];
+    deaths = map['deaths'];
+    deathsNew = map['deathsNew'];
+    previousDayTests = map['previousDayTests'];
+    totalCases = map['totalCases'];
+    sourceUrl = map['sourceUrl'];
+    lastUpdatedAtApify = map['lastUpdatedAtApify'];
+    readMe = map['readMe'];
+
+    print(readMe);
 
     regionData.forEach((element) {
       var state = place.fromMap(element);
@@ -52,40 +78,104 @@ class MyApp extends StatelessWidget {
   }
 
   Widget stateCr(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: true,
-          actions: [
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(
-                  'Covid Tracker',
-                ),
-                Text(
-                  'Created by \nChittadeep Biswas',
+    return WillPopScope(onWillPop:() async => true,
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+            appBar: AppBar(
+              title: Text("Covid Tracker"),
+              automaticallyImplyLeading: true,
+              actions: [
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Text(
+                      'Created by \nChittadeep Biswas',
+                    )
+                  ],
                 )
               ],
-            )
-          ],
-        ),
-        body: ListView.builder(
-            itemCount: data.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                  title: Text(data[index].region),
-                  subtitle: Text(data[index].activeCases.toString()),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Details(state: data[index]),
-                        ));
-                  });
-            }),
-      ),
+            ),
+            body: Center(
+              child: Column(
+                children: [
+                  Card(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Card(
+                          color: Colors.grey[100],
+                          child: Column(
+                            children: [Text('Active Cases'), Text(activeCases.toString())],
+                          ),
+                        ),
+                        Card(
+                          color: Colors.grey[100],
+                          child: Column(
+                            children: [Text('Active Cases New'), Text(activeCasesNew.toString())],
+                          ),
+                        ),
+                        Card(
+                          color: Colors.grey[100],
+                          child: Column(
+                            children: [Text('recovered'), Text(recovered.toString())],
+                          ),
+                        ),
+                        Card(
+                          color: Colors.grey[100],
+                          child: Column(
+                            children: [Text('recovered new'), Text(recoveredNew.toString())],
+                          ),
+                        ),
+                        Card(
+                          color: Colors.grey[100],
+                          child: Column(
+                            children: [Text('deaths'), Text(deaths.toString())],
+                          ),
+                        ),
+                        Card(
+                          color: Colors.grey[100],
+                          child: Column(
+                            children: [Text('deaths new'), Text(deathsNew.toString())],
+                          ),
+                        ),
+                        Card(
+                          color: Colors.grey[100],
+                          child: Column(
+                            children: [Text('previous day tests'), Text(previousDayTests.toString())],
+                          ),
+                        ),
+                        Card(
+                          color: Colors.grey[100],
+                          child: Column(
+                            children: [Text('total cases'), Text(totalCases.toString())],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                              title: Text(data[index].region),
+                              subtitle: Text(data[index].activeCases.toString()),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          Details(state: data[index]),
+                                    ));
+                              });
+                        }),
+                  ),
+                ],
+              ),
+            ),
+          )),
     );
   }
 }
