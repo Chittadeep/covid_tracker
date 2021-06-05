@@ -1,4 +1,4 @@
-class State {
+class place {
   String region;
   int activeCases;
   int newInfected;
@@ -8,11 +8,11 @@ class State {
   int newDeceased;
   int totalInfected;
 
-  State(this.region, this.activeCases, this.newInfected, this.recovered,
+  place(this.region, this.activeCases, this.newInfected, this.recovered,
       this.newRecovered, this.deceased, this.newDeceased, this.totalInfected);
 
-  factory State.fromMap(Map<String, dynamic> json) {
-    return State(
+  factory place.fromMap(Map<String, dynamic> json) {
+    return place(
         json['region'] as String,
         json['activeCases'] as int,
         json['newInfected'] as int,

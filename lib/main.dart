@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'State.dart' as State;
+import 'place.dart';
 
 void main() async {
   //await MyApp().fetchData();
@@ -21,9 +21,10 @@ class MyApp extends StatelessWidget {
         'regionData']; //gets the region datas inside the first map in list form
 
     regionData.forEach((element) {
-      print(element);
-      var state = State.State.fromMap(element);
-      print(state.region);
+      //print(element);
+      var state = place.fromMap(element);
+      data.add(state);
+      //print(state.region);
     });
 
     //var act = json.encode(regionData[0]);
@@ -70,8 +71,8 @@ class MyApp extends StatelessWidget {
               //     return Text("error occured");
               //   },
               // ),
-              //title: Text(data[index]),
-              //subtitle: Text(data[index]),
+              title: Text(data[index].region),
+              subtitle: Text(data[index].activeCases.toString()),
               );
         });
   }
