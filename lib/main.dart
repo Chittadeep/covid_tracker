@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:covid_tracker/Details.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'place.dart';
@@ -21,16 +22,9 @@ class MyApp extends StatelessWidget {
         'regionData']; //gets the region datas inside the first map in list form
 
     regionData.forEach((element) {
-      //print(element);
       var state = place.fromMap(element);
       data.add(state);
-      //print(state.region);
     });
-
-    //var act = json.encode(regionData[0]);
-    //print(act);
-    //data = regionData;
-    //print(regionData);
   }
 
   @override
@@ -58,22 +52,40 @@ class MyApp extends StatelessWidget {
   }
 
   Widget stateCr(BuildContext context) {
-    return ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-              // leading: Image.asset(
-              //   l[index].photoPath,
-              //   height: 200.0,
-              //   width: 200.0,
-              //   errorBuilder: (BuildContext context, Object exception,
-              //       StackTrace stackTrace) {
-              //     return Text("error occured");
-              //   },
-              // ),
-              title: Text(data[index].region),
-              subtitle: Text(data[index].activeCases.toString()),
-              );
-        });
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: true,
+          actions: [
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text(
+                  'Covid Tracker',
+                ),
+                Text(
+                  'Created by \nChittadeep Biswas',
+                )
+              ],
+            )
+          ],
+        ),
+        body: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                  title: Text(data[index].region),
+                  subtitle: Text(data[index].activeCases.toString()),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Details(state: data[index]),
+                        ));
+                  });
+            }),
+      ),
+    );
   }
 }
