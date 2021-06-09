@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'Place.dart';
 
 void main() async {
-  //await MyApp().fetchData();
   runApp(MyApp());
 }
 
@@ -49,13 +48,15 @@ class MyApp extends StatelessWidget {
     lastUpdatedAtApify = map['lastUpdatedAtApify'];
     readMe = map['readMe'];
 
-    nation = {'activeCases':activeCases,
-    'activeCasesNew':activeCasesNew,
-    'recovered':recovered,
-    'recovered new': recoveredNew,
-    'deaths':deaths,
-    'deaths New':deathsNew,
-    'previousDayTests':previousDayTests};
+    nation = {
+      'activeCases': activeCases,
+      'activeCasesNew': activeCasesNew,
+      'recovered': recovered,
+      'recovered new': recoveredNew,
+      'deaths': deaths,
+      'deaths New': deathsNew,
+      'previousDayTests': previousDayTests
+    };
 
     regionData.forEach((element) {
       var state = Place.fromMap(element);
@@ -77,24 +78,24 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
               home: Scaffold(
-            body: Center(child: stateCr(context)),
+            body: Center(child: SingleChildScrollView(child: stateCr(context))),
           ));
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return CircularProgressIndicator();
+        return Center(child: CircularProgressIndicator());
       },
     );
   }
 
   Widget stateCr(BuildContext context) {
-    return WillPopScope(onWillPop:() async => true,
+    return WillPopScope(
+      onWillPop: () async => true,
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           home: Scaffold(
             appBar: AppBar(
               title: Text("Covid Tracker"),
-              automaticallyImplyLeading: true,
               actions: [
                 Column(
                   mainAxisSize: MainAxisSize.max,
@@ -108,12 +109,16 @@ class MyApp extends StatelessWidget {
             ),
             body: Center(
               child: Column(
-                children: [PieChart(dataMap: nation), Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('data source $sourceUrl'),
-                    Text('data updated $lastUpdatedAtApify')
-                  ],
-                ),
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(child: SingleChildScrollView(child: PieChart(dataMap: nation))),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('data source $sourceUrl'),
+                      Text('data updated $lastUpdatedAtApify')
+                    ],
+                  ),
                   Card(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -121,25 +126,37 @@ class MyApp extends StatelessWidget {
                         Card(
                           color: Colors.grey[100],
                           child: Column(
-                            children: [Text('Active Cases'), Text(activeCases.toString())],
+                            children: [
+                              Text('Active Cases'),
+                              Text(activeCases.toString())
+                            ],
                           ),
                         ),
                         Card(
                           color: Colors.grey[100],
                           child: Column(
-                            children: [Text('Active Cases New'), Text(activeCasesNew.toString())],
+                            children: [
+                              Text('Active Cases New'),
+                              Text(activeCasesNew.toString())
+                            ],
                           ),
                         ),
                         Card(
                           color: Colors.grey[100],
                           child: Column(
-                            children: [Text('recovered'), Text(recovered.toString())],
+                            children: [
+                              Text('recovered'),
+                              Text(recovered.toString())
+                            ],
                           ),
                         ),
                         Card(
                           color: Colors.grey[100],
                           child: Column(
-                            children: [Text('recovered new'), Text(recoveredNew.toString())],
+                            children: [
+                              Text('recovered new'),
+                              Text(recoveredNew.toString())
+                            ],
                           ),
                         ),
                         Card(
@@ -151,42 +168,95 @@ class MyApp extends StatelessWidget {
                         Card(
                           color: Colors.grey[100],
                           child: Column(
-                            children: [Text('deaths new'), Text(deathsNew.toString())],
+                            children: [
+                              Text('deaths new'),
+                              Text(deathsNew.toString())
+                            ],
                           ),
                         ),
                         Card(
                           color: Colors.grey[100],
                           child: Column(
-                            children: [Text('previous day tests'), Text(previousDayTests.toString())],
+                            children: [
+                              Text('previous day tests'),
+                              Text(previousDayTests.toString())
+                            ],
                           ),
                         ),
                         Card(
                           color: Colors.grey[100],
                           child: Column(
-                            children: [Text('total cases'), Text(totalCases.toString())],
+                            children: [
+                              Text('total cases'),
+                              Text(totalCases.toString())
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
+                  /*ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                            title: Text(data[index].region),
+                            subtitle:
+                                Text(data[index].activeCases.toString()),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        Details(state: data[index]),
+                                  ));
+                            });
+                      }),*/
+
                   Expanded(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: data.length,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                              title: Text(data[index].region),
-                              subtitle: Text(data[index].activeCases.toString()),
-                              onTap: () {
+                    child: Container(color: Colors.grey,
+                      child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: ScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          controller: ScrollController(),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3),
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              margin: EdgeInsets.all(40),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  side: BorderSide(color: Colors.blue, width: 2)),
+                              borderOnForeground: true,
+                              child: InkWell(
+                                splashColor: Colors.blue.withAlpha(30),
+                                child: Center(child: Text(data[index].region)),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            Details(state: data[index]),
+                                      ));
+                                },
+                              ),
+                            );
+                          }),
+                    ),
+                  )
+
+                  /*onTap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           Details(state: data[index]),
                                     ));
-                              });
+                          );
                         }),
-                  ),
+                  )*/
                 ],
               ),
             ),
