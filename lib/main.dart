@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
               home: Scaffold(
-            body: Center(child: SingleChildScrollView(child: stateCr(context))),
+            body: Center(child: stateCr(context)),
           ));
         }
 
@@ -107,114 +107,114 @@ class MyApp extends StatelessWidget {
                 )
               ],
             ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(child: SingleChildScrollView(child: PieChart(dataMap: nation))),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('data source $sourceUrl'),
-                      Text('data updated $lastUpdatedAtApify')
-                    ],
-                  ),
-                  Card(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            body: SingleChildScrollView(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    PieChart(dataMap: nation),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Card(
-                          color: Colors.grey[100],
-                          child: Column(
-                            children: [
-                              Text('Active Cases'),
-                              Text(activeCases.toString())
-                            ],
-                          ),
-                        ),
-                        Card(
-                          color: Colors.grey[100],
-                          child: Column(
-                            children: [
-                              Text('Active Cases New'),
-                              Text(activeCasesNew.toString())
-                            ],
-                          ),
-                        ),
-                        Card(
-                          color: Colors.grey[100],
-                          child: Column(
-                            children: [
-                              Text('recovered'),
-                              Text(recovered.toString())
-                            ],
-                          ),
-                        ),
-                        Card(
-                          color: Colors.grey[100],
-                          child: Column(
-                            children: [
-                              Text('recovered new'),
-                              Text(recoveredNew.toString())
-                            ],
-                          ),
-                        ),
-                        Card(
-                          color: Colors.grey[100],
-                          child: Column(
-                            children: [Text('deaths'), Text(deaths.toString())],
-                          ),
-                        ),
-                        Card(
-                          color: Colors.grey[100],
-                          child: Column(
-                            children: [
-                              Text('deaths new'),
-                              Text(deathsNew.toString())
-                            ],
-                          ),
-                        ),
-                        Card(
-                          color: Colors.grey[100],
-                          child: Column(
-                            children: [
-                              Text('previous day tests'),
-                              Text(previousDayTests.toString())
-                            ],
-                          ),
-                        ),
-                        Card(
-                          color: Colors.grey[100],
-                          child: Column(
-                            children: [
-                              Text('total cases'),
-                              Text(totalCases.toString())
-                            ],
-                          ),
-                        ),
+                        Text('data source $sourceUrl'),
+                        Text('data updated $lastUpdatedAtApify')
                       ],
                     ),
-                  ),
-                  /*ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                            title: Text(data[index].region),
-                            subtitle:
-                                Text(data[index].activeCases.toString()),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        Details(state: data[index]),
-                                  ));
-                            });
-                      }),*/
+                    Card(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Card(
+                            color: Colors.grey[100],
+                            child: Column(
+                              children: [
+                                Text('Active Cases'),
+                                Text(activeCases.toString())
+                              ],
+                            ),
+                          ),
+                          Card(
+                            color: Colors.grey[100],
+                            child: Column(
+                              children: [
+                                Text('Active Cases New'),
+                                Text(activeCasesNew.toString())
+                              ],
+                            ),
+                          ),
+                          Card(
+                            color: Colors.grey[100],
+                            child: Column(
+                              children: [
+                                Text('recovered'),
+                                Text(recovered.toString())
+                              ],
+                            ),
+                          ),
+                          Card(
+                            color: Colors.grey[100],
+                            child: Column(
+                              children: [
+                                Text('recovered new'),
+                                Text(recoveredNew.toString())
+                              ],
+                            ),
+                          ),
+                          Card(
+                            color: Colors.grey[100],
+                            child: Column(
+                              children: [Text('deaths'), Text(deaths.toString())],
+                            ),
+                          ),
+                          Card(
+                            color: Colors.grey[100],
+                            child: Column(
+                              children: [
+                                Text('deaths new'),
+                                Text(deathsNew.toString())
+                              ],
+                            ),
+                          ),
+                          Card(
+                            color: Colors.grey[100],
+                            child: Column(
+                              children: [
+                                Text('previous day tests'),
+                                Text(previousDayTests.toString())
+                              ],
+                            ),
+                          ),
+                          Card(
+                            color: Colors.grey[100],
+                            child: Column(
+                              children: [
+                                Text('total cases'),
+                                Text(totalCases.toString())
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    /*ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                              title: Text(data[index].region),
+                              subtitle:
+                                  Text(data[index].activeCases.toString()),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          Details(state: data[index]),
+                                    ));
+                              });
+                        }),*/
 
-                  Expanded(
-                    child: Container(color: Colors.grey,
+                    Container(color: Colors.grey,
                       child: GridView.builder(
                           shrinkWrap: true,
                           physics: ScrollPhysics(),
@@ -244,20 +244,20 @@ class MyApp extends StatelessWidget {
                               ),
                             );
                           }),
-                    ),
-                  )
+                    )
 
-                  /*onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          Details(state: data[index]),
-                                    ));
-                          );
-                        }),
-                  )*/
-                ],
+                    /*onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            Details(state: data[index]),
+                                      ));
+                            );
+                          }),
+                    )*/
+                  ],
+                ),
               ),
             ),
           )),
