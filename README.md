@@ -2,17 +2,19 @@
 
 A  Flutter project.
 
-This Project was made for the Project Exhibition Hackathon arranged by BCET(Bengal College of Engineering and Technology, Durgapur).
+This Project was made for the Project Exhibition Hackathon arranged by BCET(Bengal College of Engineering and Technology, Durgapur
 
-![Chrome Screen1 default size ](https://user-images.githubusercontent.com/37974051/120983056-f850d180-c796-11eb-984a-1a8a3fafb603.png)
+![Chrome Screen1 default size ](https://user-images.githubusercontent.com/37974051/121724331-55d17f00-cb05-11eb-8f57-1b3afc7c761d.png)
 # Chrome Screen1 default size 
 
-![Chrome Screen 2 default](https://user-images.githubusercontent.com/37974051/120984167-018e6e00-c798-11eb-946a-39a87d1eeaa8.png)
+![Chrome Screen 2 default size](https://user-images.githubusercontent.com/37974051/121724334-579b4280-cb05-11eb-85f9-174f9c183f6f.png)
 # Chrome Screen 2 default size
 
 ### Data Source(API):https://api.apify.com/v2/datasets/GN5szDInfK8hOgCna/items
 
-https://user-images.githubusercontent.com/37974051/121064840-b13dfd00-c7e5-11eb-93a8-afe9cee49b57.mp4
+
+(https://user-images.githubusercontent.com/37974051/121724142-17d45b00-cb05-11eb-8889-3264893f5a81.png)
+
 
 The app works perfectly in chrome(Flutter Web)
 
