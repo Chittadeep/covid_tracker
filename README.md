@@ -13,9 +13,9 @@ This Project was made for the Project Exhibition Hackathon arranged by BCET(Beng
 ### Data Source(API):https://api.apify.com/v2/datasets/GN5szDInfK8hOgCna/items
 
 
-(https://user-images.githubusercontent.com/37974051/121724142-17d45b00-cb05-11eb-8889-3264893f5a81.png)
-
-
 The app works perfectly in chrome(Flutter Web)
 
 But stll there is a problem to be fixed for the mobile version.
+
+https://user-images.githubusercontent.com/37974051/121729387-080c4500-cb0c-11eb-964a-9f5a431e9bcb.mp4
+
