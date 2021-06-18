@@ -4,6 +4,8 @@ A  Flutter project.
 
 This Project was made for the Project Exhibition Hackathon arranged by BCET(Bengal College of Engineering and Technology, Durgapur
 
+Won the second prize for it.
+
 ![Chrome Screen1 default size ](https://user-images.githubusercontent.com/37974051/121724331-55d17f00-cb05-11eb-8f57-1b3afc7c761d.png)
 # Chrome Screen1 default size 
 
