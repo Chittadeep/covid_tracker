@@ -21,3 +21,12 @@ But stll there is a problem to be fixed for the mobile version.
 
 https://user-images.githubusercontent.com/37974051/121729387-080c4500-cb0c-11eb-964a-9f5a431e9bcb.mp4
 
+
+
+## My Achievements on the project: 
+
+<div style="display:flex; justi">
+<img src= "https://user-images.githubusercontent.com/37974051/124169500-ef1c0180-dac3-11eb-96a3-fcab98ed36fe.png" height = 200 width = 200>
+<img src= "https://user-images.githubusercontent.com/37974051/124169523-f3e0b580-dac3-11eb-98f4-7b019b11b68c.jpg" height = 200 width = 200>
+<img src= "https://user-images.githubusercontent.com/37974051/124170528-29d26980-dac5-11eb-9405-7ef4a4dff844.jpg" height = 200 width = 200>
+</div>
